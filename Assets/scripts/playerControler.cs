@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 public class playerControler : MonoBehaviour
 {
     public float walkSpeed;
-    
+
     Vector2 jumpInput;
 
     public bool IsJumping
@@ -46,16 +46,17 @@ public class playerControler : MonoBehaviour
         {
             return is_facing_right;
         }
-            private set
+        private set
         {
             if (is_facing_right != value)
             {
                 transform.localScale *= new Vector2(-1, 1);
             }
             is_facing_right = value;
-        } 
-            }
+        }
+    }
 
+    
     
 
     Rigidbody2D rb;
@@ -89,11 +90,19 @@ public class playerControler : MonoBehaviour
         
     }
 
+    
     public void OnMove(InputAction.CallbackContext context)
     {
-        moveInput = context.ReadValue<Vector2>();
-        IsMoving = moveInput != Vector2.zero;
-        SetFacingDirection(moveInput);
+        if(animator.GetBool("canMove"))
+        {
+            moveInput = context.ReadValue<Vector2>();
+            IsMoving = moveInput != Vector2.zero;
+
+        }
+        
+           
+
+            SetFacingDirection(moveInput);
         
     }
 
@@ -112,13 +121,24 @@ public class playerControler : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         //jumpInput = context.ReadValue<Vector2>();
-        if (context.started && touchingDirections.isGround)
+        if (context.started && animator.GetBool("canMove") && touchingDirections.isGround || touchingDirections.isOnWall)
         {
             animator.SetTrigger(AnimationStrings.playerJump);
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
 
         }
+        // new if statement for if (on wall) allow wall jump where it pushes player off wall
         
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            animator.SetTrigger(AnimationStrings.attack);
+
+        }
+       
     }
 
     

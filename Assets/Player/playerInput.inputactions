@@ -271,17 +271,6 @@
                     "action": "jump",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9c308e8d-6b28-49bc-8cba-e579c28b3994",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
