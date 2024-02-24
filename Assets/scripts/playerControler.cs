@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections))]
+[RequireComponent(typeof(Rigidbody2D), typeof(TouchingDirections), typeof(Damageable))]
 public class playerControler : MonoBehaviour
 {
     public float walkSpeed;
@@ -62,6 +62,7 @@ public class playerControler : MonoBehaviour
     Rigidbody2D rb;
     public Animator animator;
     TouchingDirections touchingDirections;
+    Damageable damageable;
     public float jumpAmount = 5f;
 
     // Start is called before the first frame update
@@ -70,6 +71,7 @@ public class playerControler : MonoBehaviour
          rb = GetComponent<Rigidbody2D>();
         animator = GetComponent < Animator >();
         touchingDirections = GetComponent<TouchingDirections>();
+        damageable = GetComponent<Damageable>();
     }
     void Start()
     {
@@ -93,7 +95,7 @@ public class playerControler : MonoBehaviour
     
     public void OnMove(InputAction.CallbackContext context)
     {
-        if(animator.GetBool("canMove"))
+        if(animator.GetBool("canMove") && damageable.IsAlive )
         {
             moveInput = context.ReadValue<Vector2>();
             IsMoving = moveInput != Vector2.zero;
@@ -121,7 +123,7 @@ public class playerControler : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         //jumpInput = context.ReadValue<Vector2>();
-        if (context.started && animator.GetBool("canMove") && touchingDirections.isGround || touchingDirections.isOnWall)
+        if (context.started && animator.GetBool("canMove") && touchingDirections.isGround || touchingDirections.isOnWall && damageable.IsAlive)
         {
             animator.SetTrigger(AnimationStrings.playerJump);
             rb.velocity = new Vector2(rb.velocity.x, jumpAmount);
