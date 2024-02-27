@@ -87,7 +87,12 @@ public class playerControler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(moveInput.x * walkSpeed, rb.velocity.y);
+        if (!damageable.LockVel)
+        {
+            rb.velocity = new Vector2(moveInput.x * walkSpeed, rb.velocity.y);
+
+        }
+       
         animator.SetFloat(AnimationStrings.yVelocity, rb.velocity.y);
         
     }
@@ -141,6 +146,12 @@ public class playerControler : MonoBehaviour
 
         }
        
+    }
+
+    public void OnHit(float damage, Vector2 knockback)
+    {
+        rb.velocity = new Vector2(knockback.x, rb.velocity.y + knockback.y);
+
     }
 
     

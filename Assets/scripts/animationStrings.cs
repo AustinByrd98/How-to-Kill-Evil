@@ -13,4 +13,6 @@ internal class AnimationStrings
     internal static string isGrounded = "isGrounded";
     internal static string canMove = "canMove";
     internal static string attack = "attack";
+    internal static string lockVel = "lockVel";
+    internal static string hit = "hit";
 }

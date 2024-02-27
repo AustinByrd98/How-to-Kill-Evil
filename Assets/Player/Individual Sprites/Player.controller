@@ -17,6 +17,23 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
+--- !u!114 &-8912938286061391055
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5218436e988148c5980c41ab5c45c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolName: lockVel
+  updateOnState: 1
+  updateOnStateMachine: 0
+  valueOnEnter: 1
+  valueOnExit: 0
 --- !u!1107 &-8296377336027471312
 AnimatorStateMachine:
   serializedVersion: 6
@@ -29,6 +46,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -3550138367710995170}
     m_Position: {x: 640, y: 120, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3022265251031370976}
+    m_Position: {x: 620, y: -100, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 2074693662769973121}
@@ -41,6 +61,7 @@ AnimatorStateMachine:
     m_Position: {x: 340, y: 290, z: 0}
   m_AnyStateTransitions:
   - {fileID: 7052317819410531303}
+  - {fileID: -1614462022193816778}
   m_EntryTransitions: []
   m_StateMachineTransitions:
   - first: {fileID: 7660072267642167793}
@@ -102,6 +123,31 @@ AnimatorTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 1
+--- !u!1101 &-7334154694410413309
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isGrounded
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 2074693662769973121}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-6868010442122819559
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -428,6 +474,36 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-3022265251031370976
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: playerHit
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 7451693040469592902}
+  - {fileID: -7334154694410413309}
+  m_StateMachineBehaviours:
+  - {fileID: -125285117113509582}
+  - {fileID: -8912938286061391055}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: e95074df3429c47eb852c62389f413f6, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-2615223734338854293
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -453,6 +529,37 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-1614462022193816778
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: lockVel
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: IsAlive
+    m_EventTreshold: 0
+  - m_ConditionMode: 1
+    m_ConditionEvent: hit
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3022265251031370976}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 0
 --- !u!1101 &-1025890727090758501
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -547,6 +654,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-125285117113509582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5218436e988148c5980c41ab5c45c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boolName: canMove
+  updateOnState: 1
+  updateOnStateMachine: 0
+  valueOnEnter: 0
+  valueOnExit: 1
 --- !u!1101 &-19925131796250222
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -640,6 +764,18 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
+    m_Controller: {fileID: 0}
+  - m_Name: lockVel
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: hit
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
     m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
@@ -908,6 +1044,31 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 0
+--- !u!1101 &7451693040469592902
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: isGrounded
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 8250229538794660747}
+  m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &7551433498355608748
 AnimatorState:
   serializedVersion: 6

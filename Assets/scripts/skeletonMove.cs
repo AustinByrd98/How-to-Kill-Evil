@@ -68,7 +68,7 @@ public class skeletonMove : MonoBehaviour
             FlipDirection();
         }
 
-        if (damageable.IsAlive)
+        if (damageable.IsAlive && !damageable.LockVel)
         {
             rb.velocity = new Vector2(walkSpeed * WalkDirectionVector.x, rb.velocity.y);
         }
