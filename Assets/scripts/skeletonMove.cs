@@ -63,7 +63,7 @@ public class skeletonMove : MonoBehaviour
 
     public void FixedUpdate()
     {
-        if(touchingDirections.isGround && touchingDirections.isOnWall && damageable.IsAlive)
+        if(touchingDirections.isGround && touchingDirections.isOnWall && damageable.IsAlive || animator.GetBool("isHit" ))
         {
             FlipDirection();
         }
